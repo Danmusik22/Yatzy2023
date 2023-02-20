@@ -36,7 +36,6 @@ function chooseDice(target) {
         target.src = `/images/Dice.${terningKast}.png`;
         target.dataset.valgt = "false";
     }
-    holds[id-1] = !holds[id-1];
 }
 
 //-------------------POINTS-------------------------------------------
