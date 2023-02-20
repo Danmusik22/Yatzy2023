@@ -1,29 +1,40 @@
 let bodyNode = document.getElementsByTagName("body")[0];
 
+let holds = [false, false, false, false, false, false];
+
+//---------------------TERNING-----------------------------------------
 let terninger = Array.from(bodyNode.querySelectorAll("img"));
 let button = document.getElementById("knap-rul");
 
+for (const terning of terninger) {
+    terning.addEventListener("click", () => {
+        chooseDice(terning);
+    });
+}
+
 button.addEventListener("click", () => {
-    rulTerninger(terninger);
+    rollDice(terninger);
 })
 
-button = document.querySelector("button")
-button.onclick = () => clickStuff()
-function clickStuff() {
-    button.style.padding = '20px'
-} 
 
 
-
-//Initialize game functionality
-
-function rulTerninger(terninger) {
-
+function rollDice(terninger) {
     for (const i in terninger) {
-        let rand = Math.trunc((Math.random()*6) + 1);
-        terninger[i].src = `/images/Dice${rand}.png`;
+        if (holds[i]) {
+            let rand = Math.trunc((Math.random()*6) + 1);
+            terninger[i].src = `/images/Dice.${rand}.png`;
+        }
     }
 }
+
+function chooseDice(target) {
+    let id = target.id.split(".")[1];
+    let terningKast = target.src.split(".")[4];
+    target.src = `/images/Valgt.${terningKast}.png`;
+    holds[id-1] = true;
+}
+
+//-------------------POINTS-------------------------------------------
 function initializeGameFunctions() {
   let values = [5]
   let throwCount = 0
