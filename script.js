@@ -14,13 +14,15 @@ for (const terning of terninger) {
 
 button.addEventListener("click", () => {
     rollDice(terninger);
-})
+});
 
 
 
 function rollDice(terninger) {
     for (const i in terninger) {
-        if (holds[i]) {
+        console.log(holds[i])
+        if (!holds[i]) {
+            console.log(i);
             let rand = Math.trunc((Math.random()*6) + 1);
             terninger[i].src = `/images/Dice.${rand}.png`;
         }
@@ -30,8 +32,12 @@ function rollDice(terninger) {
 function chooseDice(target) {
     let id = target.id.split(".")[1];
     let terningKast = target.src.split(".")[4];
-    target.src = `/images/Valgt.${terningKast}.png`;
-    holds[id-1] = true;
+    if (!holds[id-1]) {
+        target.src = `/images/Valgt.${terningKast}.png`;
+    } else {
+        target.src = `/images/Dice.${terningKast}.png`;
+    }
+    holds[id-1] = !holds[id-1];
 }
 
 //-------------------POINTS-------------------------------------------
