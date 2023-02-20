@@ -183,4 +183,3 @@ function initializeGameFunctions() {
     }
     return bonus;
   }
-}
