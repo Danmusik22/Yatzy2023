@@ -1,7 +1,5 @@
 let bodyNode = document.getElementsByTagName("body")[0];
 
-let holds = [false, false, false, false, false, false];
-
 //---------------------TERNING-----------------------------------------
 let terninger = Array.from(bodyNode.querySelectorAll("img"));
 let button = document.getElementById("knap-rul");
@@ -20,9 +18,7 @@ button.addEventListener("click", () => {
 
 function rollDice(terninger) {
     for (const i in terninger) {
-        console.log(holds[i])
-        if (!holds[i]) {
-            console.log(i);
+        if (terninger[i].dataset.valgt == "false") {
             let rand = Math.trunc((Math.random()*6) + 1);
             terninger[i].src = `/images/Dice.${rand}.png`;
         }
@@ -32,10 +28,13 @@ function rollDice(terninger) {
 function chooseDice(target) {
     let id = target.id.split(".")[1];
     let terningKast = target.src.split(".")[4];
-    if (!holds[id-1]) {
+
+    if (target.dataset.valgt == "false") {
         target.src = `/images/Valgt.${terningKast}.png`;
+        target.dataset.valgt = "true";
     } else {
         target.src = `/images/Dice.${terningKast}.png`;
+        target.dataset.valgt = "false";
     }
     holds[id-1] = !holds[id-1];
 }
