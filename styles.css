@@ -1,15 +1,16 @@
 .grid{
     display: grid;
     grid-template-columns: 200px 200px 200px;
-    grid-template-rows: repeat(auto-fit, 30px);
+    grid-template-rows: repeat(auto-fit, 35px);
 }
 .kast p{
     display: inline-block;
+    height: 15px;
+    margin: 10px;
 }
 
-input{
+.kast input{
     width: 50px;
-    text-align: right;
 }
 
 img {
