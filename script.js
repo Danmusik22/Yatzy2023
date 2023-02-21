@@ -1,13 +1,44 @@
-button = document.querySelector("button")
-button.onclick = () => clickStuff()
-function clickStuff() {
-  button.style.padding = '20px'
-} 
+let bodyNode = document.getElementsByTagName("body")[0];
+
+//---------------------TERNING-----------------------------------------
+let terninger = Array.from(bodyNode.querySelectorAll("img"));
+let button = document.getElementById("knap-rul");
+
+for (const terning of terninger) {
+    terning.addEventListener("click", () => {
+        chooseDice(terning);
+    });
+}
+
+button.addEventListener("click", () => {
+    rollDice(terninger);
+});
 
 
 
-//Initialize game functionality
+function rollDice(terninger) {
+    for (const i in terninger) {
+        if (terninger[i].dataset.valgt == "false") {
+            let rand = Math.trunc((Math.random()*6) + 1);
+            terninger[i].src = `/images/Dice.${rand}.png`;
+        }
+    }
+}
 
+function chooseDice(target) {
+    let id = target.id.split(".")[1];
+    let terningKast = target.src.split(".")[4];
+
+    if (target.dataset.valgt == "false") {
+        target.src = `/images/Valgt.${terningKast}.png`;
+        target.dataset.valgt = "true";
+    } else {
+        target.src = `/images/Dice.${terningKast}.png`;
+        target.dataset.valgt = "false";
+    }
+}
+
+//-------------------POINTS-------------------------------------------
 function initializeGameFunctions() {
   let values = [5]
   let throwCount = 0
@@ -156,3 +187,14 @@ function initializeGameFunctions() {
     return bonus;
   }
 }
+
+  function yatzyPoints() {
+    bonus = 0;
+    for (i = 1; i < calcCounts().length; i++) {
+      if (calcCounts()[i] > 4) {
+        bonus = 50;
+        break;
+      }
+    }
+    return bonus;
+  }
