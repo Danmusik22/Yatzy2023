@@ -31,3 +31,8 @@ body {
 img {
     width: 80px;
 }
+
+.kast label{
+   position:relative;
+
+}
