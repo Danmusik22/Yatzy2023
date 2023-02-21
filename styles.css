@@ -11,13 +11,17 @@ body {
 }
 .grid{
     display: grid;
-    grid-template-columns: 200px 200px 200px;
+    grid-template-columns: 180px 200px 200px;
     grid-template-rows: repeat(auto-fit, 35px);
 }
-.kast p{
+.kast label{
     display: inline-block;
     height: 15px;
     margin: 10px;
+}
+
+.kast{
+    text-align: right;
 }
 
 .kast input{
