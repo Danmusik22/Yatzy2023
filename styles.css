@@ -1,10 +1,13 @@
 body {
     background-image: linear-gradient(rgba(255, 255, 0, 0.200), rgba(255, 166, 0, 0.500));
     padding: 20px;
+    display: grid;
+    justify-content: center;
 }
 #top-section, #bottom-section {
     border: 1px solid rgba(0, 0, 0, 0.215);
     padding: 20px;
+    width: 600px;
 }
 #bottom-section {
     margin-top: 10px;
