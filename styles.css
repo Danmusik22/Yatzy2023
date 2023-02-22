@@ -26,7 +26,6 @@ body {
     grid-row-start: 1;
     grid-row-end: 2;
 
-
     display: grid;
     grid-template-rows: 80px;
     grid-template-columns: 80px 80px 80px 80px 80px;
@@ -55,7 +54,11 @@ img {
 
     background-color: #ffa60080;
     border-color: #8f7814ae;
-
+    box-shadow: 0px 5px 5px #8a712e96;
+}
+#knap-rul:hover {
+    box-shadow: 2px -3px 6px 0px #ffe292b7 inset, -2px 3px 6px 0px #ffe292b7 inset, 0px 5px 5px #8a712e96;
+    background-color: #e6970584;
 }
 
 /* -------------------------------------------------------------- */
