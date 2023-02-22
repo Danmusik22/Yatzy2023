@@ -9,9 +9,15 @@ body {
     padding: 20px;
     width: 600px;
 }
+
+.dice:hover {
+    rotate: 5deg;
+}
+
 #bottom-section {
     margin-top: 10px;
 }
+
 .grid{
     display: grid;
     grid-template-columns: 180px 200px 200px;

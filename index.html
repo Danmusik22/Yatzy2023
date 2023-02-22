@@ -1,123 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
-    <title>Yatzy</title>
-  </head>
-  <body>
-    <div id="top-section">
-      <img data-valgt="false" id="terning-1" src="/images/Dice.1.png" alt="" />
-      <img data-valgt="false" id="terning-2" src="/images/Dice.2.png" alt="" />
-      <img data-valgt="false" id="terning-3" src="/images/Dice.3.png" alt="" />
-      <img data-valgt="false" id="terning-4" src="/images/Dice.4.png" alt="" />
-      <img data-valgt="false" id="terning-5" src="/images/Dice.5.png" alt="" />
-      <img data-valgt="false" id="terning-6" src="/images/Dice.6.png" alt="" />
-      <button id="knap-rul">Rul</button>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
+  <title>Yatzy</title>
+</head>
+
+<body>
+  <div id="top-section">
+    <div id="terninger">
+      <img data-valgt="false" id="terning-1" class="dice" src="/images/Dice.1.png" alt="" />
+      <img data-valgt="false" id="terning-2" class="dice" src="/images/Dice.2.png" alt="" />
+      <img data-valgt="false" id="terning-3" class="dice" src="/images/Dice.3.png" alt="" />
+      <img data-valgt="false" id="terning-4" class="dice" src="/images/Dice.4.png" alt="" />
+      <img data-valgt="false" id="terning-5" class="dice" src="/images/Dice.5.png" alt="" />
+      <img data-valgt="false" id="terning-6" class="dice" src="/images/Dice.6.png" alt="" />
     </div>
-    <div id="bottom-section" class="grid">
-      <div class="kast test1">
-        <label for="1-label">1-s</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="2-label">2-s</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="3-label">3-s</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="4-label">4-s</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="5-label">5-s</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="6-label">6-s</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div class="kast">
-        <label for="bonus-label">Bonus:</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div class="kast">
-        <label for="Sum-label">Sum:</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div class="kast">
-        <label for="1pair-label">One Pair</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="2pair-label">Two Pair</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="3same-label">Three same</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="4same-label">Four same</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="FullHouse-label">Full House</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="SmallStraight-label">Small Straight</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="LargeStraight-label">Large Straight</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="Chance-label">Chance</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div></div>
-      <div class="kast">
-        <label for="Yatzy-label">Yatzy</label>
-        <input type="text" name="" id="" />
-      </div>
-      <div></div>
-      <div class="kast">
-        <label for="Total-label">Total</label>
-        <input type="text" name="" id="" />
-      </div>
+
+    <button id="knap-rul">Rul</button>
+  </div>
+  <div id="bottom-section" class="grid">
+    <div class="kast test1">
+      <label for="1-label">1-s</label>
+      <input type="text" name="" id="" />
     </div>
-  </body>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="2-label">2-s</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="3-label">3-s</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="4-label">4-s</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="5-label">5-s</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="6-label">6-s</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div class="kast">
+      <label for="bonus-label">Bonus:</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div class="kast">
+      <label for="Sum-label">Sum:</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div class="kast">
+      <label for="1pair-label">One Pair</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="2pair-label">Two Pair</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="3same-label">Three same</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="4same-label">Four same</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="FullHouse-label">Full House</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="SmallStraight-label">Small Straight</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="LargeStraight-label">Large Straight</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="Chance-label">Chance</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div></div>
+    <div class="kast">
+      <label for="Yatzy-label">Yatzy</label>
+      <input type="text" name="" id="" />
+    </div>
+    <div></div>
+    <div class="kast">
+      <label for="Total-label">Total</label>
+      <input type="text" name="" id="" />
+    </div>
+  </div>
+</body>
+
 </html>
