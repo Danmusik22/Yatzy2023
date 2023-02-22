@@ -1,3 +1,5 @@
+
+
 body {
     background-image: linear-gradient(rgba(255, 255, 0, 0.200), rgba(255, 166, 0, 0.500));
     padding: 20px;
@@ -10,9 +12,50 @@ body {
     width: 600px;
 }
 
+/*----------------------- top-section ------------------------------*/
+
+#top-section {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    justify-content: center;
+}
+
+#terninger {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+
+    display: grid;
+    grid-template-rows: 80px;
+    grid-template-columns: 80px 80px 80px 80px 80px;
+    justify-content: space-between;
+    width: 500px;
+    border: 1px solid;
+}
+
 .dice:hover {
     rotate: 5deg;
 }
+
+img {
+    width: 80px;
+}
+
+#knap-rul {
+    grid-row-start: 3;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 1;
+
+    height: 30px;
+    width: 120px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+/* -------------------------------------------------------------- */
 
 #bottom-section {
     margin-top: 10px;
@@ -37,10 +80,6 @@ body {
     width: 50px;
     /* Gør input-felter not-editable */
     pointer-events: none;
-}
-
-img {
-    width: 80px;
 }
 
 .kast label{
