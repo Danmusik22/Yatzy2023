@@ -1,7 +1,7 @@
 
 
 body {
-    background-image: linear-gradient(rgba(255, 255, 0, 0.200), rgba(255, 166, 0, 0.500));
+    background-image: linear-gradient(rgba(255, 255, 0, 0.200), rgba(255, 166, 0, 0.502));
     padding: 20px;
     display: grid;
     justify-content: center;
@@ -32,7 +32,6 @@ body {
     grid-template-columns: 80px 80px 80px 80px 80px;
     justify-content: space-between;
     width: 500px;
-    border: 1px solid;
 }
 
 .dice:hover {
@@ -46,13 +45,17 @@ img {
 #knap-rul {
     grid-row-start: 3;
     grid-row-end: 3;
-    grid-column-start: 1;
-    grid-column-end: 1;
+    grid-column-start: 4;
+    grid-column-end: 4;
 
     height: 30px;
-    width: 120px;
+    width: 100px;
     margin-top: 10px;
-    margin-left: 20px;
+    margin-right: 20px;
+
+    background-color: #ffa60080;
+    border-color: #8f7814ae;
+
 }
 
 /* -------------------------------------------------------------- */
