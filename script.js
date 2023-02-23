@@ -17,12 +17,16 @@ button.addEventListener("click", () => {
 
 
 function rollDice(terninger) {
+  let terningValues = [];
     for (const i in terninger) {
         if (terninger[i].dataset.valgt == "false") {
             let rand = Math.trunc((Math.random()*6) + 1);
             terninger[i].src = `/images/Dice.${rand}.png`;
+            let urlString = terninger[i].src;
+            terningValues[i] = parseInt(urlString.split(".")[4]);
         }
     }
+    console.log(terningValues);
 }
 
 function chooseDice(target) {
