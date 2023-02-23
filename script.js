@@ -7,6 +7,7 @@ let terninger = Array.from(bodyNode.querySelectorAll("img"));
 let button = document.getElementById("knap-rul");
 
 //Array af int-værdier af terning-slagene. Bliver opdateret i rollDoce() metoden
+//kan bruges til at aflæse point
 let terningValues = [];
 
 //Loop som tilføjer event listener til hver terning, så man kan klikke på alle terningerne
