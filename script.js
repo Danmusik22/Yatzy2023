@@ -1,43 +1,77 @@
 let bodyNode = document.getElementsByTagName("body")[0];
 
-//---------------------TERNING-----------------------------------------
+//Array af <img> -elementer, som viser de terningeslag der er blevet slået
 let terninger = Array.from(bodyNode.querySelectorAll("img"));
+
+//Rul knappen
 let button = document.getElementById("knap-rul");
 
+//Array af int-værdier af terning-slagene. Bliver opdateret i rollDoce() metoden
+let terningValues = [];
+
+//Loop som tilføjer event listener til hver terning, så man kan klikke på alle terningerne
 for (const terning of terninger) {
     terning.addEventListener("click", () => {
         chooseDice(terning);
     });
 }
 
+//event listener til 'rul' -knappen
 button.addEventListener("click", () => {
     rollDice(terninger);
 });
 
 
+//---------------------TERNING---------------------------------------------
 
+/*
+funktion rollDice(terninger) 
+  param: array af <img>-elementer
+
+  loop går igennem hver <img>-element 
+  tjekker om 'valgt' attributten er false
+  hvis den er det:
+      Generér et tilfældigt tal mellem 1 og 6
+      Sæt stien til aktuelle <img> til at matche
+      det tal der blev generet.
+      Gem den nye sti i en variabel: urlString
+      Opdatér i'ende plads i terningValues[] til
+      det tilfældige generede tal.
+*/
 function rollDice(terninger) {
-  let terningValues = [];
     for (const i in terninger) {
         if (terninger[i].dataset.valgt == "false") {
             let rand = Math.trunc((Math.random()*6) + 1);
             terninger[i].src = `/images/Dice.${rand}.png`;
             let urlString = terninger[i].src;
-            terningValues[i] = parseInt(urlString.split(".")[4]);
+            terningValues[i] = rand;
         }
     }
     console.log(terningValues);
 }
 
+/*
+funktion chooseDice(target)
+  param: <img>-element
+
+  Få værdien ved at <img>.src -strengen ved hvert "."
+  og gem strengen på plads 4 i variablen terningValue
+
+  Hvis <img>s valgt-data-attribut er false:
+    Ændre billedet til sort
+    Ændre valgt-data-attributten til true
+  ellers:
+    Ændre billedet til transperent
+    Ændre valgt-data-attributten til false
+*/
 function chooseDice(target) {
-    let id = target.id.split(".")[1];
-    let terningKast = target.src.split(".")[4];
+    let terningValue = target.src.split(".")[4];
 
     if (target.dataset.valgt == "false") {
-        target.src = `/images/Valgt.${terningKast}.png`;
+        target.src = `/images/Valgt.${terningValue}.png`;
         target.dataset.valgt = "true";
     } else {
-        target.src = `/images/Dice.${terningKast}.png`;
+        target.src = `/images/Dice.${terningValue}.png`;
         target.dataset.valgt = "false";
     }
 }
