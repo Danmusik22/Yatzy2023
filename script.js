@@ -266,5 +266,5 @@ for(let i = 0; i < pointInputs.length; i++) {
 
 function lockInput(input) {
   input.dataset.locked = "true";
-  input.style.border = "green";
+  input.disabled = "true";
 }
