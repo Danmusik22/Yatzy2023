@@ -60,6 +60,9 @@ function rollDice(terninger) {
     rollCount --;
     let rollCountText = document.getElementById("count");
     rollCountText.innerHTML = `Antal kast: ${rollCount}`
+    
+    let results = getResults();
+    console.log(results);
 }
 
 /*
@@ -93,6 +96,51 @@ function chooseDice(target) {
 }
 
 //-------------------POINTS-------------------------------------------
+
+function calcCounts() {
+  let øjne = [0, 0, 0, 0, 0, 0];
+  for (value of terningValues) {
+    øjne[value -1]++;
+  }
+  return øjne;
+}
+
+function sameValuePoints(value) {
+    return calcCounts()[value-1] * value;
+}
+
+function onePairPoints() {
+    værdi = 0;
+    for (i = 1; i < calcCounts().length; i++) {
+      if (calcCounts()[i] > 1) {
+        værdi = i;
+      }
+    }
+    return 2 * værdi;
+}
+
+function getResults() {
+  console.log()
+  
+    let results = [Array.from(document.getElementsByClassName("point")).length];
+    for (let i = 0; i < 6; i++) {
+      results[i] = sameValuePoints(i + 1);
+    }
+    // results[6] = this.onePairPoints();
+    // results[7] = this.twoPairPoints();
+    // results[8] = this.threeSamePoints();
+    // results[9] = this.fourSamePoints();
+    // results[10] = this.fullHousePoints();
+    // results[11] = this.smallStraightPoints();
+    // results[12] = this.largeStraightPoints();
+    // results[13] = this.chancePoints();
+    // results[14] = this.yatzyPoints();
+
+    return results;
+  }
+
+
+
 function initializeGameFunctions() {
   let values = [5]
   let throwCount = 0
@@ -106,45 +154,19 @@ function initializeGameFunctions() {
     throwCount++;
   }
 
-  function getResults() {
-    let results = []
-    for (i = 0; i <= 5; i++) {
-      results[i] = this.sameValuePoints(i + 1);
-    }
-    results[6] = this.onePairPoints();
-    results[7] = this.twoPairPoints();
-    results[8] = this.threeSamePoints();
-    results[9] = this.fourSamePoints();
-    results[10] = this.fullHousePoints();
-    results[11] = this.smallStraightPoints();
-    results[12] = this.largeStraightPoints();
-    results[13] = this.chancePoints();
-    results[14] = this.yatzyPoints();
-
-    return results;
-  }
+  
 
   function calcCounts() {
-    counts = new int[7];
-    for (i of values) {
-      counts[i]++;
+    let øjne = [0, 0, 0, 0, 0, 0];
+    for (value of terningValues) {
+      øjne[value -1]++;
     }
-    return counts;
+    console.log(øjne);
   }
 
-  function sameValuePoints(value) {
-    return calcCounts()[value] * value;
-  }
+  
 
-  function onePairPoints() {
-    værdi = 0;
-    for (i = 1; i < calcCounts().length; i++) {
-      if (calcCounts()[i] > 1) {
-        værdi = i;
-      }
-    }
-    return 2 * værdi;
-  }
+  
 
   function twoPairPoints() {
     værdi1 = 0;
