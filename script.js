@@ -8,7 +8,7 @@ let button = document.getElementById("knap-rul");
 
 //Array af int-værdier af terning-slagene. Bliver opdateret i rollDoce() metoden
 //kan bruges til at aflæse point
-let terningValues = [];
+let terningValues = [5];
 
 //Loop som tilføjer event listener til hver terning, så man kan klikke på alle terningerne
 for (const terning of terninger) {
@@ -21,6 +21,8 @@ for (const terning of terninger) {
 button.addEventListener("click", () => {
     rollDice(terninger);
 });
+
+let rollCount = 3;
 
 
 //---------------------TERNING---------------------------------------------
@@ -38,8 +40,15 @@ funktion rollDice(terninger)
       Gem den nye sti i en variabel: urlString
       Opdatér i'ende plads i terningValues[] til
       det tilfældige generede tal.
+
+    Træk 1 fra rollCount
+    Gem count html elementet i en variabel
+    set texten i variablen til at være det nye antal kast
 */
 function rollDice(terninger) {
+  if(rollCount <= 0) {
+    return;
+  }
     for (const i in terninger) {
         if (terninger[i].dataset.valgt == "false") {
             let rand = Math.trunc((Math.random()*6) + 1);
@@ -48,7 +57,9 @@ function rollDice(terninger) {
             terningValues[i] = rand;
         }
     }
-    console.log(terningValues);
+    rollCount --;
+    let rollCountText = document.getElementById("count");
+    rollCountText.innerHTML = `Antal kast: ${rollCount}`
 }
 
 /*
@@ -66,6 +77,10 @@ funktion chooseDice(target)
     Ændre valgt-data-attributten til false
 */
 function chooseDice(target) {
+    let fileName = target.src.split("/")[4];
+    if (fileName == "EmptyDice.png") {
+      return;
+    }
     let terningValue = target.src.split(".")[4];
 
     if (target.dataset.valgt == "false") {

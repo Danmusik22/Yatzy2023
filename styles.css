@@ -61,6 +61,11 @@ img {
     background-color: #e6970584;
 }
 
+#count {
+    grid-row-start: 3;
+    margin-left: 20px;
+}
+
 /* -------------------------------------------------------------- */
 
 #bottom-section {
