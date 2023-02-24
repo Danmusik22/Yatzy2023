@@ -10,6 +10,12 @@ let button = document.getElementById("knap-rul");
 //kan bruges til at aflæse point
 let terningValues = [5];
 
+let pointInputs = Array.from(document.getElementsByClassName("point"));
+
+let totalScore = 0;
+
+let rollCount = 10;
+
 
 //Loop som tilføjer event listener til hver terning, så man kan klikke på alle terningerne
 for (const terning of terninger) {
@@ -17,14 +23,6 @@ for (const terning of terninger) {
         chooseDice(terning);
     });
 }
-
-let pointInputs = Array.from(document.getElementsByClassName("point"));
-
-let rollCount = 10;
-
-
-
-
 
 //---------------------TERNING---------------------------------------------
 
@@ -221,15 +219,52 @@ let pointFunktioner =
 button.addEventListener("click", () => {
     rollDice(terninger);
     for (let i = 0; i < pointInputs.length; i++) {
-      if (i < 6) {
-        pointInputs[i].value = pointFunktioner[0](i +1);
-      } else {
-        pointInputs[i].value = pointFunktioner[i - 5]();
+      if (pointInputs[i].dataset.locked == "false") {
+          if (i < 6) {
+          pointInputs[i].value = pointFunktioner[0](i +1);
+        } else {
+          pointInputs[i].value = pointFunktioner[i - 5]();
+        }
       }
     }
+    document.getElementById("input-sum").value = sum();
+    document.getElementById("input-bonus").value = bonusPoint();
+    document.getElementById("input-total").value = total();
 });
 
-//----------------------------------------------------------------
+function total() {
+  let totalScore = 0;
+  for(input of pointInputs) {
+    totalScore += parseInt(input.value);
+  }
+  totalScore += sum() + bonusPoint();
+  return totalScore;
+}
 
+function sum() {
+  let sumScore = 0;
 
+  for(let i = 0; i < 6; i++) {
+    sumScore += parseInt(pointInputs[i].value); 
+  }
+  return sumScore;
+}
 
+function bonusPoint() {
+  if (sum() >= 63) {
+    return 50;
+  }
+  return 0;
+}
+//-----------------------Input logic-----------------------------------------
+
+for(let i = 0; i < pointInputs.length; i++) {
+  pointInputs[i].addEventListener("click", () => {
+    lockInput(pointInputs[i]);
+  })
+}
+
+function lockInput(input) {
+  input.dataset.locked = "true";
+  input.style.border = "green";
+}

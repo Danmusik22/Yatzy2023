@@ -90,7 +90,7 @@ img {
 .kast input{
     width: 50px;
     /* Gør input-felter not-editable */
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .kast label{
