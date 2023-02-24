@@ -10,6 +10,7 @@ let button = document.getElementById("knap-rul");
 //kan bruges til at aflæse point
 let terningValues = [5];
 
+
 //Loop som tilføjer event listener til hver terning, så man kan klikke på alle terningerne
 for (const terning of terninger) {
     terning.addEventListener("click", () => {
@@ -19,15 +20,10 @@ for (const terning of terninger) {
 
 let pointInputs = Array.from(document.getElementsByClassName("point"));
 
-//event listener til 'rul' -knappen
-button.addEventListener("click", () => {
-    rollDice(terninger);
-    for (let i = 0; i < pointInputs.length; i++) {
-      pointInputs[i].value = getResults()[i];
-    }
-});
+let rollCount = 10;
 
-let rollCount = 3;
+
+
 
 
 //---------------------TERNING---------------------------------------------
@@ -65,9 +61,6 @@ function rollDice(terninger) {
     rollCount --;
     let rollCountText = document.getElementById("count");
     rollCountText.innerHTML = `Antal kast: ${rollCount}`
-    
-    let results = getResults();
-    console.log(results);
 }
 
 /*
@@ -110,28 +103,30 @@ function calcCounts() {
   return øjne;
 }
 
-function sameValuePoints(value) {
-    return calcCounts()[value-1] * value;
+let sameValuePoints = function sameValuePoints(value) {
+    return calcCounts()[value -1] * value;
 }
 
-function onePairPoints() {
+let onePairPoints = function onePairPoints() {
     værdi = 0;
     for (i = 0; i < calcCounts().length; i++) {
-      if (calcCounts()[i] == 2) {
+      if (calcCounts()[i] > 1) {
         værdi = i+1;
       }
     }
     return 2 * værdi;
 }
-function twoPairPoints() {
+let twoPairPoints = function twoPairPoints() {
     værdi1 = 0;
     værdi2 = 0;
-    for (i = 0; i < calcCounts().length; i++) {
+    for (let i = calcCounts().length-1; i >= 0; i--) {
+
       if (calcCounts()[i] > 1 && værdi1 == 0) {
-        værdi1 = i;
+        værdi1 = i+1;
       }
-      if (calcCounts()[i] > 1 && værdi1 > 0) {
-        værdi2 = i;
+
+      if (calcCounts()[i] > 1) {
+        værdi2 = i+1;
       }
     }
     if (værdi1 == værdi2) {
@@ -139,88 +134,37 @@ function twoPairPoints() {
       værdi2 = 0;
     }
     return (værdi1 * 2) + (værdi2 * 2);
-
-  }
-function getResults() {
-  console.log()
-  
-    let results = [Array.from(document.getElementsByClassName("point")).length];
-    for (let i = 0; i < 6; i++) {
-      results[i] = sameValuePoints(i + 1);
-    }
-    results[6] = onePairPoints();
-    results[7] = twoPairPoints();
-    // results[8] = this.threeSamePoints();
-    // results[9] = this.fourSamePoints();
-    // results[10] = this.fullHousePoints();
-    // results[11] = this.smallStraightPoints();
-    // results[12] = this.largeStraightPoints();
-    // results[13] = this.chancePoints();
-    // results[14] = this.yatzyPoints();
-
-    return results;
   }
 
-
-
-function initializeGameFunctions() {
-  let values = [5]
-  let throwCount = 0
-
-  function throwDice(holds) {
-    for (i = 0; i < values.length; i++) {
-      if (!holds[i]) {
-        values[i] = (int)((Math.random() * 6) + 1);
-      }
-    }
-    throwCount++;
-  }
-
-  
-
-  function calcCounts() {
-    let øjne = [0, 0, 0, 0, 0, 0];
-    for (value of terningValues) {
-      øjne[value -1]++;
-    }
-    console.log(øjne);
-  }
-
-  
-
-  
-
-  
-
-  function threeSamePoints() {
+  let threeSamePoints = function threeSamePoints() {
     værdi = 0;
-    for (i = 1; i < calcCounts().length; i++) {
+    for (let i = 0; i < calcCounts().length; i++) {
       if (calcCounts()[i] > 2) {
-        værdi = i;
+        værdi = i +1;
       }
     }
     return 3 * værdi;
   }
 
-  function fourSamePoints() {
+  let fourSamePoints = function fourSamePoints() {
     værdi = 0;
-    for (i = 1; i < calcCounts().length; i++) {
+    for (let i = 0; i < calcCounts().length; i++) {
       if (calcCounts()[i] > 3) {
-        værdi = i;
+        værdi = i +1;
       }
     }
     return 4 * værdi;
   }
 
-  function fullHousePoints() {
+  let fullHousePoints = function fullHousePoints() {
     værdi1 = 0;
     værdi2 = 0;
-    for (i = 1; i < calcCounts().length; i++) {
-      if (calcCounts()[i] == 2) {
-        værdi1 = i;
+    for (let i = calcCounts().length-1; i >= 0; i--) {
+      if (calcCounts()[i] == 2 && værdi1 == 0) {
+        værdi1 = i +1;
       }
       if (calcCounts()[i] == 3) {
-        værdi2 = i;
+        værdi2 = i +1;
       }
     }
     if (værdi1 == 0 || værdi2 == 0) {
@@ -230,9 +174,9 @@ function initializeGameFunctions() {
     return værdi1 * 2 + værdi2 * 3;
   }
 
-  function smallStraightPoints() {
+  let smallStraightPoints = function smallStraightPoints() {
     counts = calcCounts();
-    for (i = 1; i < counts.length - 1; i++) {
+    for (let i = 0; i < counts.length - 1; i++) {
       if (calcCounts()[i] != 1) {
         return 0;
       }
@@ -240,8 +184,8 @@ function initializeGameFunctions() {
     return 15;
   }
 
-  function largeStraightPoints() {
-    for (i = 2; i < calcCounts().length; i++) {
+  let largeStraightPoints = function largeStraightPoints() {
+    for (let i = 1; i < calcCounts().length; i++) {
       if (calcCounts()[i] != 1) {
         return 0;
       }
@@ -249,33 +193,43 @@ function initializeGameFunctions() {
     return 20;
   }
 
-  function chancePoints() {
-    chancePoints = 0;
-    for (i = 1; i < calcCounts().length; i++) {
-      chancePoints += calcCounts()[i] * i;
+  let chancePoints = function Points() {
+    let points = 0;
+    for (let i = 0; i < calcCounts().length; i++) {
+      points += calcCounts()[i] * (i+1);
     }
-    return chancePoints;
+    return points;
   }
 
-  function yatzyPoints() {
-    bonus = 0;
-    for (i = 1; i < calcCounts().length; i++) {
-      if (calcCounts()[i] > 4) {
-        bonus = 50;
-        break;
+  let yatzyPoints = function yatzyPoints() {
+    for (i = 0; i < calcCounts().length; i++) {
+      if (calcCounts()[i] == 5) {
+        return 50;
       }
     }
-    return bonus;
+    return 0;
   }
-}
 
-  function yatzyPoints() {
-    bonus = 0;
-    for (i = 1; i < calcCounts().length; i++) {
-      if (calcCounts()[i] > 4) {
-        bonus = 50;
-        break;
+
+let pointFunktioner = 
+  [sameValuePoints, onePairPoints, twoPairPoints, 
+    threeSamePoints, fourSamePoints, fullHousePoints, 
+    smallStraightPoints, largeStraightPoints, chancePoints, 
+    yatzyPoints];
+
+//event listener til 'rul' -knappen
+button.addEventListener("click", () => {
+    rollDice(terninger);
+    for (let i = 0; i < pointInputs.length; i++) {
+      if (i < 6) {
+        pointInputs[i].value = pointFunktioner[0](i +1);
+      } else {
+        pointInputs[i].value = pointFunktioner[i - 5]();
       }
     }
-    return bonus;
-  }
+});
+
+//----------------------------------------------------------------
+
+
+
