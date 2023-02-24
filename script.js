@@ -17,9 +17,14 @@ for (const terning of terninger) {
     });
 }
 
+let pointInputs = Array.from(document.getElementsByClassName("point"));
+
 //event listener til 'rul' -knappen
 button.addEventListener("click", () => {
     rollDice(terninger);
+    for (let i = 0; i < pointInputs.length; i++) {
+      pointInputs[i].value = getResults()[i];
+    }
 });
 
 let rollCount = 3;
@@ -111,14 +116,31 @@ function sameValuePoints(value) {
 
 function onePairPoints() {
     værdi = 0;
-    for (i = 1; i < calcCounts().length; i++) {
-      if (calcCounts()[i] > 1) {
-        værdi = i;
+    for (i = 0; i < calcCounts().length; i++) {
+      if (calcCounts()[i] == 2) {
+        værdi = i+1;
       }
     }
     return 2 * værdi;
 }
+function twoPairPoints() {
+    værdi1 = 0;
+    værdi2 = 0;
+    for (i = 0; i < calcCounts().length; i++) {
+      if (calcCounts()[i] > 1 && værdi1 == 0) {
+        værdi1 = i;
+      }
+      if (calcCounts()[i] > 1 && værdi1 > 0) {
+        værdi2 = i;
+      }
+    }
+    if (værdi1 == værdi2) {
+      værdi1 = 0;
+      værdi2 = 0;
+    }
+    return (værdi1 * 2) + (værdi2 * 2);
 
+  }
 function getResults() {
   console.log()
   
@@ -126,8 +148,8 @@ function getResults() {
     for (let i = 0; i < 6; i++) {
       results[i] = sameValuePoints(i + 1);
     }
-    // results[6] = this.onePairPoints();
-    // results[7] = this.twoPairPoints();
+    results[6] = onePairPoints();
+    results[7] = twoPairPoints();
     // results[8] = this.threeSamePoints();
     // results[9] = this.fourSamePoints();
     // results[10] = this.fullHousePoints();
@@ -168,24 +190,7 @@ function initializeGameFunctions() {
 
   
 
-  function twoPairPoints() {
-    værdi1 = 0;
-    værdi2 = 0;
-    for (i = 1; i < calcCounts().length; i++) {
-      if (calcCounts()[i] > 1 && værdi1 == 0) {
-        værdi1 = i;
-      }
-      if (calcCounts()[i] > 1 && værdi1 > 0) {
-        værdi2 = i;
-      }
-    }
-    if (værdi1 == værdi2) {
-      værdi1 = 0;
-      værdi2 = 0;
-    }
-    return (værdi1 * 2) + (værdi2 * 2);
-
-  }
+  
 
   function threeSamePoints() {
     værdi = 0;
