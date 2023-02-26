@@ -4,7 +4,7 @@ let bodyNode = document.getElementsByTagName("body")[0];
 let terninger = Array.from(bodyNode.querySelectorAll("img"));
 
 //Rul knappen
-let button = document.getElementById("knap-rul");
+let rulKnap = document.getElementById("knap-rul");
 
 //Array af int-værdier af terning-slagene. Bliver opdateret i rollDoce() metoden
 //kan bruges til at aflæse point
@@ -14,7 +14,7 @@ let pointInputs = Array.from(document.getElementsByClassName("point"));
 
 let totalScore = 0;
 
-let rollCount = 10;
+let rollCount = 3;
 
 
 //Loop som tilføjer event listener til hver terning, så man kan klikke på alle terningerne
@@ -58,7 +58,10 @@ function rollDice(terninger) {
     }
     rollCount --;
     let rollCountText = document.getElementById("count");
-    rollCountText.innerHTML = `Antal kast: ${rollCount}`
+    rollCountText.innerHTML = `Antal kast: ${rollCount}`;
+    if (rollCount == 0) {
+      rulKnap.disabled = true;
+    }
 }
 
 /*
@@ -89,6 +92,18 @@ function chooseDice(target) {
         target.src = `/images/Dice.${terningValue}.png`;
         target.dataset.valgt = "false";
     }
+}
+
+function resetDice() {
+  rollCount = 3;
+  let rollCountText = document.getElementById("count");
+  rollCountText.innerHTML = `Antal kast: ${rollCount}`;
+  rulKnap.disabled = false;
+  for (let i = 0; i < terninger.length; i++) {
+    terninger[i].src = "/images/EmptyDice.png";
+    terninger[i].dataset.valgt = "false";
+    terningValues[i] = 0;
+  }
 }
 
 //-------------------POINTS-------------------------------------------
@@ -216,28 +231,19 @@ let pointFunktioner =
     yatzyPoints];
 
 //event listener til 'rul' -knappen
-button.addEventListener("click", () => {
+rulKnap.addEventListener("click", () => {
     rollDice(terninger);
-    for (let i = 0; i < pointInputs.length; i++) {
-      if (pointInputs[i].dataset.locked == "false") {
-          if (i < 6) {
-          pointInputs[i].value = pointFunktioner[0](i +1);
-        } else {
-          pointInputs[i].value = pointFunktioner[i - 5]();
-        }
-      }
-    }
-    document.getElementById("input-sum").value = sum();
-    document.getElementById("input-bonus").value = bonusPoint();
-    document.getElementById("input-total").value = total();
+    calcScores();
 });
 
 function total() {
   let totalScore = 0;
   for(input of pointInputs) {
-    totalScore += parseInt(input.value);
+    if (input.disabled) {
+      totalScore += parseInt(input.value);
+    }
   }
-  totalScore += sum() + bonusPoint();
+  totalScore += bonusPoint();
   return totalScore;
 }
 
@@ -245,7 +251,9 @@ function sum() {
   let sumScore = 0;
 
   for(let i = 0; i < 6; i++) {
-    sumScore += parseInt(pointInputs[i].value); 
+    if (pointInputs[i].disabled) {
+      sumScore += parseInt(pointInputs[i].value); 
+    }
   }
   return sumScore;
 }
@@ -256,6 +264,21 @@ function bonusPoint() {
   }
   return 0;
 }
+
+function calcScores() {
+  for (let i = 0; i < pointInputs.length; i++) {
+    if (pointInputs[i].dataset.locked == "false") {
+        if (i < 6) {
+        pointInputs[i].value = pointFunktioner[0](i +1);
+      } else {
+        pointInputs[i].value = pointFunktioner[i - 5]();
+      }
+    }
+  }
+  document.getElementById("input-sum").value = sum();
+  document.getElementById("input-bonus").value = bonusPoint();
+  document.getElementById("input-total").value = total();
+}
 //-----------------------Input logic-----------------------------------------
 
 for(let i = 0; i < pointInputs.length; i++) {
@@ -265,6 +288,34 @@ for(let i = 0; i < pointInputs.length; i++) {
 }
 
 function lockInput(input) {
-  input.dataset.locked = "true";
-  input.disabled = "true";
+  if (rollCount == 0) {
+    input.dataset.locked = "true";
+    input.disabled = "true";
+    resetDice();
+    calcScores();
+    let allLocked = true;
+    for (input of pointInputs) {
+      if (!input.disabled) {
+        allLocked = false;
+      }
+    }
+    if (allLocked) {
+      endGame();
+    }
+  }
+}
+
+//---------------------Game Loop---------------------------------------------------
+
+function gameLoop() {
+  //slå op til 3 gange
+  //vælg hvilket felt du vil bruge denne tur
+  //reset kast counter
+  //gentag indtil alle felter er låst.
+  //vis samlet antal point og en genstart knap
+}
+
+function endGame() {
+  let section = document.getElementById("bottom-section");
+  section.style.display = "none";
 }
