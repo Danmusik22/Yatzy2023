@@ -6,6 +6,16 @@ let terninger = Array.from(bodyNode.querySelectorAll("img"));
 //Rul knappen
 let rulKnap = document.getElementById("knap-rul");
 
+let buttonEndGame = document.getElementById("end-game");
+buttonEndGame.addEventListener("click", () => {
+  endGame();
+})
+
+let buttonResetgame = document.getElementById("button-reset-game");
+buttonResetgame.addEventListener("click", () => {
+  resetGame();
+})
+
 //Array af int-værdier af terning-slagene. Bliver opdateret i rollDoce() metoden
 //kan bruges til at aflæse point
 let terningValues = [5];
@@ -316,6 +326,27 @@ function gameLoop() {
 }
 
 function endGame() {
+  let score = document.getElementById("input-total").value;
+  let text = document.getElementById("end-screen-score");
+  text.innerText = `Your total score: ${score}`
   let section = document.getElementById("bottom-section");
   section.style.display = "none";
+  let endScreen = document.getElementById("end-screen");
+  endScreen.style.display = "grid";
+}
+
+function resetGame() {
+  resetDice();
+  for(input of pointInputs) {
+    input.value = 0;
+    input.disabled = false;
+    input.dataset.locked = "false";
+  }
+  document.getElementById("input-sum").value = sum();
+  document.getElementById("input-bonus").value = bonusPoint();
+  document.getElementById("input-total").value = total();
+  let bottomSection = document.getElementById("bottom-section");
+  bottomSection.style.display = "grid";
+  let endScreen = document.getElementById("end-screen");
+  endScreen.style.display = "none";
 }

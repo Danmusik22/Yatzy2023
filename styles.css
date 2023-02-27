@@ -70,6 +70,7 @@ img {
 
 #bottom-section {
     margin-top: 10px;
+    display: grid;
 }
 
 .grid{
@@ -96,4 +97,20 @@ img {
 .kast label{
    position:relative;
 
+}
+
+#end-screen {
+    display: none;
+    justify-content: center;
+    grid-template-columns: 1;
+    grid-template-rows: 3;
+}
+
+#end-screen > h3 {
+    justify-content: center;
+
+}
+
+#end-screen > button {
+    max-width: 100px;
 }
