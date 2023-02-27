@@ -1,12 +1,12 @@
-
-
 body {
     background-image: linear-gradient(rgba(255, 255, 0, 0.2), rgba(255, 166, 0, 0.502));
     padding: 20px;
     display: grid;
     justify-content: center;
 }
-#top-section, #bottom-section {
+
+#top-section,
+#bottom-section {
     border: 1px solid rgba(0, 0, 0, 0.215);
     padding: 20px;
     width: 600px;
@@ -20,7 +20,7 @@ body {
     justify-content: center;
 }
 
-#terninger {
+#dices {
     grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 1;
@@ -41,9 +41,15 @@ img {
     width: 80px;
 }
 
-#knap-rul {
-    grid-row-start: 3;
-    grid-row-end: 3;
+#throwCount {
+    grid-column-start: 3;
+    grid-column-end: 3;
+    padding-right: 20px;
+}
+
+#button-roll {
+    grid-row-start: 2;
+    grid-row-end: 2;
     grid-column-start: 4;
     grid-column-end: 4;
 
@@ -56,7 +62,8 @@ img {
     border-color: #8f7814ae;
     box-shadow: 0px 5px 5px #8a712e96;
 }
-#knap-rul:hover {
+
+#button-roll:hover {
     box-shadow: 2px -3px 6px 0px #ffe292b7 inset, -2px 3px 6px 0px #ffe292b7 inset, 0px 5px 5px #8a712e96;
     background-color: #e6970584;
 }
@@ -67,28 +74,27 @@ img {
     margin-top: 10px;
 }
 
-.grid{
+.grid {
     display: grid;
     grid-template-columns: 180px 200px 200px;
     grid-template-rows: repeat(auto-fit, 35px);
 }
-.kast label{
+
+.kast label {
     display: inline-block;
     height: 15px;
     margin: 10px;
 }
 
-.kast{
+.kast {
     text-align: right;
 }
 
-.kast input{
+.kast input {
     width: 50px;
-    /* Gør input-felter not-editable */
-    pointer-events: none;
 }
 
-.kast label{
-   position:relative;
+.kast label {
+    position: relative;
 
 }
