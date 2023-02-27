@@ -36,6 +36,20 @@ function rollDice(dices) {
   }
 }
 
+/*
+funktion chooseDice(target)
+  param: <img>-element
+
+  Få værdien ved at <img>.src -strengen ved hvert "."
+  og gem strengen på plads 4 i variablen terningValue
+
+  Hvis <img>s valgt-data-attribut er false:
+    Ændre billedet til sort
+    Ændre valgt-data-attributten til true
+  ellers:
+    Ændre billedet til transperent
+    Ændre valgt-data-attributten til false
+*/
 function chooseDice(target) {
   let diceKast = target.src.split(".")[4];
   if (target.dataset.valgt == "false") {
